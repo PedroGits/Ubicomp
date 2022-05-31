@@ -1,8 +1,4 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/ProjetoUbiqua/bin/Debug/net6.0
+﻿/ProjetoUbiqua/bin/Debug/net6.0
 /ProjetoUbiqua/obj
 /.vs/ProjetoUbiqua/v17/.suo
 /.vs/ProjetoUbiqua/DesignTimeBuild
