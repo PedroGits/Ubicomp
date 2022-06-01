@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoUbiqua.Entities;
 using ProjetoUbiqua.EntitiesManagers.Interfaces;
+using ProjetoUbiqua.JWT.Model;
 
 namespace ProjetoUbiqua.Controllers
 {
@@ -18,6 +19,12 @@ namespace ProjetoUbiqua.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Utilizador>>> GetAll()
+        {
+            return Ok(await _utilizadorManager.GetAll());
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<IEnumerable<Utilizador>>> Login(LoginModel login)
         {
             return Ok(await _utilizadorManager.GetAll());
         }

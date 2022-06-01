@@ -11,7 +11,7 @@ namespace ProjetoUbiqua.Entities
         [Required]
         public string Email { get; set; }
         [Required]        
-        public string password { get; set; }
+        public string Password { get; set; }
         public bool Is_admin { get; set; }
         public bool Banido { get; set; }
 
