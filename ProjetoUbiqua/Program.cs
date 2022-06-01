@@ -9,6 +9,7 @@ using ProjetoUbiqua.EntitiesManagers.Interfaces;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -39,10 +40,8 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidAudience = builder.Configuration.GetValue<string>("JWT:ValidAudience"),
-        ValidIssuer = builder.Configuration.GetValue<string>("JWT:ValidIssuer"),
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWT:Secret")))
+        ValidIssuer = builder.Configuration.GetValue<string>("JWToken:ValidIssuer"),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWToken:Secret")))
     };
 });
 

@@ -26,7 +26,12 @@ namespace ProjetoUbiqua.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<IEnumerable<Utilizador>>> Login(LoginModel login)
         {
-            return Ok(await _utilizadorManager.GetAll());
+            var response = await _utilizadorManager.Login(login);
+
+            if (response != default)
+                return Ok(response);
+
+            return Unauthorized();
         }
     }
 }

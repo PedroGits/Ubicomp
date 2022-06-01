@@ -25,14 +25,14 @@ namespace ProjetoUbiqua.EntitiesManagers
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<JwtSecurityToken?> Login(LoginModel login)
+        public async Task<string?> Login(LoginModel login)
         {
-            var utilizador = await _dbSet.Where(user => user.Email == login.Email && user.Password == login.Password).FirstOrDefaultAsync();
+            var utilizador = await _dbSet.Where(user => user.Email == login.Email && user.Password == login.Password && !user.Banido).FirstOrDefaultAsync();
             
             if(utilizador == default)
                             return default;
 
-            return _JWTService.GetToken(new List<Claim> { new Claim("teste","teste")});
+            return new JwtSecurityTokenHandler().WriteToken(_JWTService.GetToken(utilizador));
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using ProjetoUbiqua.Entities;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ProjetoUbiqua.Autenticação.JWT.JWTLogic.Interface
 {
     public interface IJWTService
     {
-        JwtSecurityToken GetToken(List<Claim> authClaims);
+        JwtSecurityToken GetToken(Utilizador utilizador);
     }
 }

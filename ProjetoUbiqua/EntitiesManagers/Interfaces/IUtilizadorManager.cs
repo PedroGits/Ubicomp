@@ -7,6 +7,6 @@ namespace ProjetoUbiqua.EntitiesManagers.Interfaces
     public interface IUtilizadorManager
     {
         Task<IEnumerable<Utilizador>> GetAll();
-        Task<JwtSecurityToken?> Login(LoginModel login);
+        Task<string?> Login(LoginModel login);
     }
 }
