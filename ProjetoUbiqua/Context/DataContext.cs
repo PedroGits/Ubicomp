@@ -7,7 +7,7 @@ namespace ProjetoUbiqua.Context
     {
         public DataContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Utilizador>Utilizador { get; set; }

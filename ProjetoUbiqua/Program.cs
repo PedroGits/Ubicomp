@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoUbiqua.Context;
+using ProjetoUbiqua.EntitiesManagers;
+using ProjetoUbiqua.EntitiesManagers.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,12 @@ builder.Services.AddDbContext<DataContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("UbiquaDbConnection");
     options.UseSqlServer(connectionString);
 });
+
+//Dependencias
+builder.Services.AddScoped<ISalaManager, SalaManager>();
+builder.Services.AddScoped<ISensorManager, SensorManager>();
+builder.Services.AddScoped<IUtilizadorManager, UtilizadorManager>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

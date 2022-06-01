@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoUbiqua.Entities;
 using ProjetoUbiqua.EntitiesManagers.Interfaces;
 
 namespace ProjetoUbiqua.Controllers
@@ -13,6 +14,12 @@ namespace ProjetoUbiqua.Controllers
         public UtilizadorController(IUtilizadorManager utilizadorManager)
         {
             _utilizadorManager = utilizadorManager;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Utilizador>>> GetAll()
+        {
+            return Ok(await _utilizadorManager.GetAll());
         }
     }
 }
