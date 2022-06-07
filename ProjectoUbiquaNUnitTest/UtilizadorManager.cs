@@ -38,7 +38,7 @@ namespace ProjectoUbiquaNUnitTest
           
 
             //var utilizadorManager = new UtilizadorManager(context., );
-            var credenciais = new LoginModel { Email = "teste@teste.com", Password = "teste" };
+            var credenciais = new LoginDTO { Email = "teste@teste.com", Password = "teste" };
 
             //await utilizadorManager.Login(credenciais);
             Assert.Fail();

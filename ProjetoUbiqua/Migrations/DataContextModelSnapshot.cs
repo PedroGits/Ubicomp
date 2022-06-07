@@ -44,7 +44,7 @@ namespace ProjetoUbiqua.Migrations
 
                     b.HasKey("ID_Sala");
 
-                    b.ToTable("Sala");
+                    b.ToTable("Sala", (string)null);
                 });
 
             modelBuilder.Entity("ProjetoUbiqua.Entities.Sensor", b =>
@@ -73,7 +73,7 @@ namespace ProjetoUbiqua.Migrations
 
                     b.HasIndex("SalaID_Sala");
 
-                    b.ToTable("Sensor");
+                    b.ToTable("Sensor", (string)null);
                 });
 
             modelBuilder.Entity("ProjetoUbiqua.Entities.Utilizador", b =>
@@ -104,7 +104,7 @@ namespace ProjetoUbiqua.Migrations
 
                     b.HasKey("ID_Utilizador");
 
-                    b.ToTable("Utilizador");
+                    b.ToTable("Utilizador", (string)null);
                 });
 
             modelBuilder.Entity("SalaUtilizador", b =>
@@ -119,7 +119,7 @@ namespace ProjetoUbiqua.Migrations
 
                     b.HasIndex("UtilizadoresID_Utilizador");
 
-                    b.ToTable("SalaUtilizador");
+                    b.ToTable("SalaUtilizador", (string)null);
                 });
 
             modelBuilder.Entity("ProjetoUbiqua.Entities.Sensor", b =>

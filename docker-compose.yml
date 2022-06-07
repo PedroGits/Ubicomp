@@ -1,0 +1,25 @@
+services:
+    db:
+        restart: always
+        image: "mcr.microsoft.com/mssql/server:latest"
+        ports:
+            - "1433:1433"
+        environment:
+            SA_PASSWORD: "PASSWORDteste2022.!?"
+            ACCEPT_EULA: "Y"
+    mosquitto:
+        restart: always
+        image: eclipse-mosquitto
+        ports:
+            - "1883:1883"
+        volumes:
+            - C:\Users\USER\Documents\mosquittoConfig:/mosquitto/config
+    web:
+        restart: always
+        build: .
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+            - mosquitto
+         

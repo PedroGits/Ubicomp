@@ -16,5 +16,7 @@ namespace ProjetoUbiqua.Entities
         public bool EstadoLuzes { get; set; }
 
         public List<Utilizador>? Utilizadores { get; set; }   
+
+        public List<Sensor>? Sensores { get;set; }  
     }
 }

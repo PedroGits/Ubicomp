@@ -3,3 +3,7 @@
 /.vs/ProjetoUbiqua/v17/.suo
 /.vs/ProjetoUbiqua/DesignTimeBuild
 /.vs/ProjetoUbiqua/v17
+/ProjectoUbiquaNUnitTest/bin/Debug/net6.0/runtimes
+./obj
+/ProjectoUbiquaNUnitTest/bin
+/ProjectoUbiquaNUnitTest/obj
