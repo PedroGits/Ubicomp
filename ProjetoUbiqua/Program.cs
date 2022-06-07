@@ -2,6 +2,9 @@
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
+//"Injetar" a config numa classe estatica
+ClienteMqtt.SetConfiguration(configuration);
+
 // Add services to the container.
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -11,10 +14,13 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 //Dependencias
+
 builder.Services.AddScoped<ISalaManager, SalaManager>();
 builder.Services.AddScoped<ISensorManager, SensorManager>();
 builder.Services.AddScoped<IUtilizadorManager, UtilizadorManager>();
 builder.Services.AddScoped<IJWTService, JWTService>();
+
+
 
 builder.Services.AddAuthentication(options =>
 {

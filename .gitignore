@@ -7,3 +7,5 @@
 ./obj
 /ProjectoUbiquaNUnitTest/bin
 /ProjectoUbiquaNUnitTest/obj
+./.vs
+/.vs

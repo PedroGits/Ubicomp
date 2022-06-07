@@ -38,6 +38,7 @@
 		<Using Include="Microsoft.OpenApi.Models" />
 		<Using Include="ProjetoUbiqua.EntitiesManagers" />
 		<Using Include="ProjetoUbiqua.EntitiesManagers.Interfaces" />
+		<Using Include="ProjetoUbiqua.Mqtt" />
 	</ItemGroup>
 
 </Project>

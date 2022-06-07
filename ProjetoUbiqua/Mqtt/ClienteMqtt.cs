@@ -7,22 +7,38 @@ namespace ProjetoUbiqua.Mqtt
     public static class ClienteMqtt 
     {
         private static IMqttClient client;
-        private static MqttClientOptions options;
+        private static MqttClientOptions? options = default;
         private static bool conectadoAoBroker = false;
+        public static IConfiguration? _config { get; set; }
 
         static ClienteMqtt()
         { 
             var mqttFactory = new MqttFactory();
             client = mqttFactory.CreateMqttClient();
 
-            options = new MqttClientOptionsBuilder()
-                .WithClientId("UbiquaServer")
-                .WithTcpServer("mosquitto", 1883)
-                .WithCleanSession()
-                .Build();
-
             client.ConnectedAsync += Client_ConnectedAsync;
             client.DisconnectedAsync += Client_DisconnectedAsync;
+        }
+
+        public static void SetConfiguration(IConfiguration config)
+        {
+            _config = config;
+            setOptions();
+        }
+
+        private static void setOptions()
+        {
+            if (options != default || _config == default)
+                return;
+
+            var mqttAddress = _config.GetValue<string>("MosquittoAddress");
+            var portaMqtt = _config.GetValue<int>("MosquittoPort");
+
+            options = new MqttClientOptionsBuilder()
+                .WithClientId("UbiquaServer")
+                .WithTcpServer(mqttAddress, portaMqtt)
+                .WithCleanSession()
+                .Build();
         }
 
         public static async void MandarMensagemAsync(string mensagem, string topico)
