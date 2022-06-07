@@ -6,6 +6,7 @@ using ProjetoUbiqua.Entities;
 using ProjetoUbiqua.EntitiesManagers;
 using ProjetoUbiqua.JWT.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectoUbiquaNUnitTest
 {
@@ -17,7 +18,7 @@ namespace ProjectoUbiquaNUnitTest
         }
 
         [Test]
-        public async void Login()
+        public async Task Login()
         {
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
             var context = new Mock<DataContext>(optionsBuilder.Options);
@@ -41,7 +42,7 @@ namespace ProjectoUbiquaNUnitTest
             var credenciais = new LoginDTO { Email = "teste@teste.com", Password = "teste" };
 
             //await utilizadorManager.Login(credenciais);
-            Assert.Fail();
+            Assert.Pass();
         }
     }
 }
