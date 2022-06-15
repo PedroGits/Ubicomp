@@ -20,7 +20,7 @@ namespace ProjetoUbiqua.Controllers
         }
        
         
-        [HttpGet]
+        [HttpGet, Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult<IEnumerable<Utilizador>>> GetAll()
         {
             return Ok(await _utilizadorManager.GetAll());

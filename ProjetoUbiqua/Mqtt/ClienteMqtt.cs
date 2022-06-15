@@ -76,7 +76,7 @@ namespace ProjetoUbiqua.Mqtt
 
         private static async Task Client_DisconnectedAsync(MqttClientDisconnectedEventArgs arg)
         {
-            Console.WriteLine("Desconectado ao Broker MQTT");
+            Console.WriteLine("Desconectado do Broker MQTT");
             return;
         }
 

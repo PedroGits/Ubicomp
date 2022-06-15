@@ -1,17 +1,7 @@
-#teste ao uso de compose no ci
-image:
-  name: docker/compose:latest
+stages:
+  - deploy
 
-services:
-  - docker:dind
-
-before_script:
-  - docker version
-  - docker-compose version
-
-build:
-  stage: build
-  script:
-    - docker-compose down
-    - docker-compose build
-    - docker-compose up
+deploy-job:
+  stage: deploy
+  script: 
+    - pwd
