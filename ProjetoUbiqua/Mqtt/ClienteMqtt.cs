@@ -1,47 +1,34 @@
-﻿using MQTTnet;
+﻿using Microsoft.Extensions.Options;
+using MQTTnet;
 using MQTTnet.Client;
 using ProjetoUbiqua.Mqtt.Interface;
 
 namespace ProjetoUbiqua.Mqtt
 {
-    public static class ClienteMqtt 
+    public class ClienteMqtt : IClienteMqtt
     {
-        private static IMqttClient client;
-        private static MqttClientOptions? options = default;
-        private static bool conectadoAoBroker = false;
-        public static IConfiguration? _config { get; set; }
+        private IMqttClient client;
+        private MqttClientOptions? options = default;
+        private bool conectadoAoBroker = false;
 
-        static ClienteMqtt()
+        public ClienteMqtt(IConfiguration configuration)
         { 
             var mqttFactory = new MqttFactory();
             client = mqttFactory.CreateMqttClient();
-
-            client.ConnectedAsync += Client_ConnectedAsync;
-            client.DisconnectedAsync += Client_DisconnectedAsync;
-        }
-
-        public static void SetConfiguration(IConfiguration config)
-        {
-            _config = config;
-            setOptions();
-        }
-
-        private static void setOptions()
-        {
-            if (options != default || _config == default)
-                return;
-
-            var mqttAddress = _config.GetValue<string>("MosquittoAddress");
-            var portaMqtt = _config.GetValue<int>("MosquittoPort");
+            var mqttAddress = configuration.GetValue<string>("MosquittoAddress");
+            var portaMqtt = configuration.GetValue<int>("MosquittoPort");
 
             options = new MqttClientOptionsBuilder()
                 .WithClientId("UbiquaServer")
                 .WithTcpServer(mqttAddress, portaMqtt)
                 .WithCleanSession()
                 .Build();
+
+            client.ConnectedAsync += Client_ConnectedAsync;
+            client.DisconnectedAsync += Client_DisconnectedAsync;
         }
 
-        public static async void MandarMensagemAsync(string mensagem, string topico)
+        public async void MandarMensagemAsync(string mensagem, string topico)
         {
             await ConectarAoBroker();
 
@@ -50,13 +37,13 @@ namespace ProjetoUbiqua.Mqtt
                 .WithPayload(mensagem)
                 .Build();
 
-            if(conectadoAoBroker)
+            if (conectadoAoBroker)
                 await client.PublishAsync(mqttMessage);
 
             await DesconectarDoBroker();
         }
 
-        private static async Task ConectarAoBroker()
+        private async Task ConectarAoBroker()
         {
             if (conectadoAoBroker)
                 return;
@@ -65,7 +52,7 @@ namespace ProjetoUbiqua.Mqtt
             conectadoAoBroker = true;
         }
 
-        private static async Task DesconectarDoBroker()
+        private async Task DesconectarDoBroker()
         {
             if (!conectadoAoBroker)
                 return;

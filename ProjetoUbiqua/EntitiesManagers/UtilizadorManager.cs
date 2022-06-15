@@ -14,14 +14,16 @@ namespace ProjetoUbiqua.EntitiesManagers
     {
         private readonly DataContext _dataContext;
         private readonly IJWTService _JWTService;
+        private readonly IClienteMqtt _mqttService;
 
-        public UtilizadorManager(DataContext dataContext, IJWTService jWTService)
+        public UtilizadorManager(DataContext dataContext, IJWTService jWTService, IClienteMqtt mqttService)
         {
             _dataContext = dataContext;
             _JWTService = jWTService;
+            _mqttService = mqttService;
         }
 
-        public async Task AssociarSala(int IdUtilizador, int SalaId)
+        public async Task DesassociarSala(int IdUtilizador, int SalaId)
         {
             var utilizador = await _dataContext.Utilizador.Where(user => user.ID_Utilizador == IdUtilizador).Include(x => x.Salas).FirstOrDefaultAsync();
             
@@ -34,13 +36,16 @@ namespace ProjetoUbiqua.EntitiesManagers
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task DesassociarSala(int IdUtilizador, int SalaId)
+        public async Task AssociarSala(int IdUtilizador, int SalaId)
         {
             var utilizador = await _dataContext.Utilizador.Where(user => user.ID_Utilizador == IdUtilizador).Include(x => x.Salas).FirstOrDefaultAsync();
             var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == SalaId).FirstOrDefaultAsync();
 
             if (utilizador == default || sala == default)
                 throw new NullReferenceException();
+
+            if (utilizador.Salas != default && utilizador.Salas.Any(sala => sala.ID_Sala == SalaId))
+                return;
 
             utilizador.Salas.Add(sala);
 
@@ -84,7 +89,7 @@ namespace ProjetoUbiqua.EntitiesManagers
 
         public async Task<IEnumerable<Utilizador>> GetAll()
         {
-            ClienteMqtt.MandarMensagemAsync("teste", "teste");
+            _mqttService.MandarMensagemAsync("teste", "teste");
 
             return await _dataContext.Utilizador.ToListAsync();
         }

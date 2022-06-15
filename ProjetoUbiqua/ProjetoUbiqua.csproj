@@ -39,6 +39,7 @@
 		<Using Include="ProjetoUbiqua.EntitiesManagers" />
 		<Using Include="ProjetoUbiqua.EntitiesManagers.Interfaces" />
 		<Using Include="ProjetoUbiqua.Mqtt" />
+		<Using Include="ProjetoUbiqua.Mqtt.Interface" />
 	</ItemGroup>
 
 </Project>
