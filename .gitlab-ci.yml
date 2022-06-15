@@ -1,13 +1,16 @@
-stages:
-  - deploy
+image:
+  name: docker/compose:latest
+
+services:
+  - docker:dind
 
 before_script:
   - docker version
   - docker-compose version
 
-deploy-job:
-  stage: deploy
+build:
+  stage: build
   script:
     - docker-compose down
     - docker-compose build
-    - docker-compose up
+    - docker-compose up tester-image
