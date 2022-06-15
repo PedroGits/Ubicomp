@@ -2,17 +2,17 @@ before_script:
   - docker version
   - ls
   - lsb_release -d
-  - mkdir /home/mosquittoconfig
+  
 
 #stages:
-#  - test
+  - test
 #  - build
 
-#test-stage:
-#  stage: test
-#  script:
+test-stage:
+  stage: test
+  script:
 #    - docker build -f Dockerfile_Test .
-
+    - mkdir /home/mosquittoconfig
 #build-stage:
 #  stage: build
 #  script:
