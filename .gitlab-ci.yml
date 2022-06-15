@@ -6,9 +6,18 @@ before_script:
 
 stages:
   - test
+  - build
 
 test-stage:
   stage: test
   script:
     - docker build -f Dockerfile_Test .
+
+build-stage:
+  stage: build
+  script:
+    - docker-compose down
+    - docker-compose build
+    - docker-compose up tester-image
+
 
