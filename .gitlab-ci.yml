@@ -4,4 +4,4 @@ stages:
 deploy-job:
   stage: deploy
   script: 
-    - pwd
+    - ls
