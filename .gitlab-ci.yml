@@ -2,23 +2,23 @@ before_script:
   - docker version
   - ls
   - lsb_release -d
-  - docker-compose version
+  - mkdir /home/mosquittoconfig
 
-stages:
-  - test
-  - build
+#stages:
+#  - test
+#  - build
 
-test-stage:
-  stage: test
-  script:
-    - docker build -f Dockerfile_Test .
+#test-stage:
+#  stage: test
+#  script:
+#    - docker build -f Dockerfile_Test .
 
-build-stage:
-  stage: build
-  script:
-    - ls /home
-    - docker-compose down
-    - docker-compose build
-    - docker-compose up tester-image
+#build-stage:
+#  stage: build
+#  script:
+#    - ls /home
+#    - docker-compose down
+#    - docker-compose build
+#    - docker-compose up tester-image
 
 
