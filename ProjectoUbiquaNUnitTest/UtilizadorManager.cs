@@ -268,8 +268,7 @@ namespace ProjectoUbiquaNUnitTest
 
             var idUtilizador = await _dataContext.Utilizador.MaxAsync(x => x.ID_Utilizador);
 
-            //Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Apagar(idUtilizador + 1));
-            Assert.Fail();
+            Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Apagar(idUtilizador + 1));
         }
     }
 }
