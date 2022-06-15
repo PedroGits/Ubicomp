@@ -1,6 +1,8 @@
 before_script:
   - docker version
   - ls
+  - lsb_release -d
+  - docker-compose version
 
 stages:
   - test
