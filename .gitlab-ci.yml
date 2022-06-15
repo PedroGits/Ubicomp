@@ -2,8 +2,8 @@ before_script:
   - docker version
   - ls
   - lsb_release -d
-  - sudo apt update
-  - sudo apt install docker-compose
+  - apt update
+  - apt install docker-compose
   - docker-compose version
 
 stages:
