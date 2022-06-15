@@ -16,6 +16,7 @@ test-stage:
 build-stage:
   stage: build
   script:
+    - ls /home
     - docker-compose down
     - docker-compose build
     - docker-compose up tester-image
