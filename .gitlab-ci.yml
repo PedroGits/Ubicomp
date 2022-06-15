@@ -1,7 +1,13 @@
 stages:
   - deploy
 
+before_script:
+  - docker version
+  - docker-compose version
+
 deploy-job:
   stage: deploy
-  script: 
-    - ls
+  script:
+    - docker-compose down
+    - docker-compose build
+    - docker-compose up
