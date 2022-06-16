@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoUbiqua.Entities
 {
@@ -12,7 +13,7 @@ namespace ProjetoUbiqua.Entities
         [Required]
         public string Tipo { get; set; }
         public string? Descricao { get; set; }
-        public Sala Sala { get; set; }
+        public int SalaID_Sala { get; set; }
 
         [DefaultValue(false)]
         public bool? Ligado { get; set; }
