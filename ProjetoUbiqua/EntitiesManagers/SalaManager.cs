@@ -53,7 +53,7 @@ namespace ProjetoUbiqua.EntitiesManagers
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task AssociarSensorSala(int IdSensor, int IdSala)
+        public async Task AssociarSensorSala(int IdSala, int IdSensor)
         {
             var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == IdSala).Include(x => x.Sensores).FirstOrDefaultAsync();
             var sensor = await _dataContext.Sensor.Where(sensor => sensor.ID_Sensor == IdSensor).FirstOrDefaultAsync();
@@ -70,7 +70,7 @@ namespace ProjetoUbiqua.EntitiesManagers
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task DesassociarSensorSala(int IdSensor, int IdSala)
+        public async Task DesassociarSensorSala(int IdSala, int IdSensor)
         {
             var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == IdSala).Include(x => x.Sensores).FirstOrDefaultAsync();
 
@@ -101,9 +101,6 @@ namespace ProjetoUbiqua.EntitiesManagers
             var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == IdSala).Include(x => x.Sensores).FirstOrDefaultAsync();
 
             if (sala == default)
-                throw new NullReferenceException();
-
-            if (sala.Sensores == null)
                 throw new NullReferenceException();
 
             List<Sensor> sensores = sala.Sensores;
