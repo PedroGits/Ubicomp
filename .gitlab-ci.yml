@@ -1,31 +1,18 @@
 before_script:
   - docker version
   - ls
-  - lsb_release -d
-  - mkdir /home/mosquittoconfig
-  
 
 stages:
   - test
   - build
 
+
 test-stage:
-  stage: 
-    - test
+  stage:
+    - build
   tags:
     - ubicomp
   script:
     - docker build -f Dockerfile_Test .
     - ls
-build-stage:
-  stage: 
-    - build
-  tags:
-    - ubicomp
-  script:
-    - ls /home
-    - docker-compose down
-    - docker-compose build
-    - docker-compose up tester-image
-
 
