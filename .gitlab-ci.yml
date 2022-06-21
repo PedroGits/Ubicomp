@@ -10,14 +10,16 @@ before_script:
   - build
 
 test-stage:
-  stage: test
+  stage: 
+    - test
   tags:
-    -ubicomp
+    - ubicomp
   script:
     - docker build -f Dockerfile_Test .
     - ls
 build-stage:
-  stage: build
+  stage: 
+    - build
   tags:
     - ubicomp
   script:
