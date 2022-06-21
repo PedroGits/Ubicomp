@@ -5,6 +5,10 @@ services:
         image: "mcr.microsoft.com/mssql/server:latest"
         ports:
             - "1433:1433"
+        voulmes:
+            - C:\Users\Cliente\Documents\SqlServer\SqlServerData:/var/opt/mssql/data
+            - C:\Users\Cliente\Documents\SqlServer\SqlServerLog:/var/opt/mssql/log
+            - C:\Users\Cliente\Documents\SqlServer\SqlServerSecrets:/var/opt/mssql/secrets
         environment:
             SA_PASSWORD: "PASSWORDteste2022.!?"
             ACCEPT_EULA: "Y"
@@ -14,7 +18,7 @@ services:
         ports:
             - "8889:1883"
         volumes:
-            - C:\Users\USER\Documents\mosquittoConfig:/mosquitto/config
+            - C:\Users\Cliente\Documents\mosquittoConfig:/mosquitto/config
     web:
         restart: always
         build: .
