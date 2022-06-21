@@ -6,7 +6,6 @@ stages:
   - test
   - build
 
-
 test-stage:
   stage:
     - build
