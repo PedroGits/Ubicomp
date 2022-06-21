@@ -7,19 +7,19 @@ before_script:
 
 #stages:
   - test
-#  - build
+  - build
 
 test-stage:
   stage: test
   script:
-#    - docker build -f Dockerfile_Test .
+    - docker build -f Dockerfile_Test .
     - ls
-#build-stage:
-#  stage: build
-#  script:
-#    - ls /home
-#    - docker-compose down
-#    - docker-compose build
-#    - docker-compose up tester-image
+build-stage:
+  stage: build
+  script:
+    - ls /home
+    - docker-compose down
+    - docker-compose build
+    - docker-compose up tester-image
 
 
