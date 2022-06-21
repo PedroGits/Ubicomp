@@ -5,7 +5,7 @@ services:
         image: "mcr.microsoft.com/mssql/server:latest"
         ports:
             - "1433:1433"
-        voulmes:
+        volumes:
             - C:\Users\Cliente\Documents\SqlServer\SqlServerData:/var/opt/mssql/data
             - C:\Users\Cliente\Documents\SqlServer\SqlServerLog:/var/opt/mssql/log
             - C:\Users\Cliente\Documents\SqlServer\SqlServerSecrets:/var/opt/mssql/secrets
