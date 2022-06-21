@@ -7,8 +7,6 @@ stages:
 
 test-stage:
   stage: test
-  tags:
-    - ubicomp
   script:
     - docker build -f Dockerfile_Test .
 
