@@ -11,11 +11,15 @@ before_script:
 
 test-stage:
   stage: test
+  tags:
+    -ubicomp
   script:
     - docker build -f Dockerfile_Test .
     - ls
 build-stage:
   stage: build
+  tags:
+    - ubicomp
   script:
     - ls /home
     - docker-compose down
