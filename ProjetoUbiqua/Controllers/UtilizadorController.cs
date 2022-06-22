@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoUbiqua.DTO;
 using ProjetoUbiqua.Entities;
-using ProjetoUbiqua.EntitiesManagers.Interfaces;
-using ProjetoUbiqua.JWT.Model;
 using ProjetoUbiqua.RBAC;
 
 namespace ProjetoUbiqua.Controllers
@@ -27,12 +25,15 @@ namespace ProjetoUbiqua.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Utilizador>> Adicionar(Utilizador utilizador)
+        public async Task<ActionResult<Utilizador>> Adicionar(RegistoDTO utilizador)
         {
             try
             {
-                var novoUitlizador = await _utilizadorManager.Adicionar(utilizador);
-                return Ok(novoUitlizador);
+                var novoUtilizador = await _utilizadorManager.Adicionar(utilizador);
+                if (novoUtilizador == null)
+                    return Problem("Nome ou Email já existem!");
+
+                return Ok(novoUtilizador);
             }
             catch
             {

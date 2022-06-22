@@ -1,12 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjetoUbiqua.Autenticacao.JWT.JWTLogic.Interface;
-using ProjetoUbiqua.Context;
+﻿using ProjetoUbiqua.DTO;
 using ProjetoUbiqua.Entities;
-using ProjetoUbiqua.EntitiesManagers.Interfaces;
-using ProjetoUbiqua.JWT.Model;
-using ProjetoUbiqua.Mqtt;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace ProjetoUbiqua.EntitiesManagers
 {
@@ -109,14 +103,29 @@ namespace ProjetoUbiqua.EntitiesManagers
             };
         }
 
-        public async Task<Utilizador> Adicionar(Utilizador utilizador)
+        public async Task<Utilizador> Adicionar(RegistoDTO utilizador)
         {
-            utilizador.ID_Utilizador = 0;
+            var utilizadorAlreadyExists = _dataContext.Utilizador
+                .Where(uti => uti.Email == utilizador.Email || uti.NomeUtilizador == utilizador.NomeUtilizador)
+                .Any();
+
+            if (utilizadorAlreadyExists)
+                return default;
+
+            var novoUtilizador = new Utilizador
+            {
+                Is_admin = false,
+                Banido = false,
+                Email = utilizador.Email,
+                NomeUtilizador = utilizador.Email,
+                Password = utilizador.Password
+            };
+
             
-            await _dataContext.AddAsync(utilizador);
+            await _dataContext.AddAsync(novoUtilizador);
             await _dataContext.SaveChangesAsync();
 
-            return utilizador;
+            return novoUtilizador;
         }
     }
 }

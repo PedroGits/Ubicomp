@@ -1,4 +1,4 @@
-﻿namespace ProjetoUbiqua.JWT.Model
+﻿namespace ProjetoUbiqua.DTO
 {
     public class RespostaTokenDTO
     {

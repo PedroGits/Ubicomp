@@ -1,14 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Moq;
 using NUnit.Framework;
 using ProjectoUbiquaNUnitTest.ServiceMock;
 using ProjetoUbiqua.Context;
+using ProjetoUbiqua.DTO;
 using ProjetoUbiqua.Entities;
 using ProjetoUbiqua.EntitiesManagers;
-using ProjetoUbiqua.JWT.Model;
-using ProjetoUbiqua.Mqtt;
-using ProjetoUbiqua.Mqtt.Interface;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -191,16 +187,7 @@ namespace ProjectoUbiquaNUnitTest
 
             UtilizadorManager utilizadorManagerTest = new UtilizadorManager(_dataContext, jwtServiceMock, clienteMqtt);
 
-            var novoUtilizador = new Utilizador
-            {
-                NomeUtilizador = "testeAdd",
-                Password = "testeAdd",
-                Email = "testeAdd@teste.com",
-                Banido = true,
-                ID_Utilizador = 0,
-                Is_admin = true,
-                Salas = default
-            };
+            var novoUtilizador = new RegistoDTO("testeAdd", "testeAdd", "testeAdd@teste.com");
 
             Assert.DoesNotThrowAsync(() => utilizadorManagerTest.Adicionar(novoUtilizador));
         }
