@@ -2,7 +2,7 @@ version: "2.0"
 services:
     db:
         restart: always
-        image: "mcr.microsoft.com/mssql/server:latest"
+        image: "mcr.microsoft.com/mssql/server:latest:ubicomp"
         ports:
             - "1433:1433"
         volumes:
@@ -14,14 +14,14 @@ services:
             ACCEPT_EULA: "Y"
     mosquitto:
         restart: always
-        image: eclipse-mosquitto
+        image: eclipse-mosquitto:ubicomp
         ports:
             - "8889:1883"
         volumes:
             - C:\Users\Cliente\Documents\mosquittoConfig:/mosquitto/config
     web:
         restart: always
-        build: .
+        build: .:ubicomp
         ports:
             - "8888:80"
         environment:
