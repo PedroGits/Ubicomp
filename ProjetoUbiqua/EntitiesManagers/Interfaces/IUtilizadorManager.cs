@@ -11,7 +11,7 @@ namespace ProjetoUbiqua.EntitiesManagers.Interfaces
         Task Editar(Utilizador utilizador);
         Task<Utilizador> Adicionar(RegistoDTO utilizador);
         Task Apagar(int IdUtilizador);
-        Task Banir(int IdUtilizador);
+        Task Banir(int IdUtilizador, bool estado);
         Task AssociarSala(int IdUtilizador, int SalaId);
         Task DesassociarSala(int IdUtilizador, int SalaId);
     }

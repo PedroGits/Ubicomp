@@ -48,14 +48,17 @@ namespace ProjetoUbiqua.EntitiesManagers
         }
 
 
-        public async Task Banir(int IdUtilizador)
+        public async Task Banir(int IdUtilizador, bool estado)
         {
             var utilizador = await _dataContext.Utilizador.Where(user => user.ID_Utilizador == IdUtilizador).FirstOrDefaultAsync();
 
             if (utilizador == default)
                 throw new NullReferenceException();
 
-            utilizador.Banido = true;
+            if (utilizador.Banido == estado)
+                return;
+
+            utilizador.Banido = estado;
 
             _dataContext.Update(utilizador);
             await _dataContext.SaveChangesAsync();

@@ -69,11 +69,11 @@ namespace ProjetoUbiqua.Controllers
         }
 
         [HttpPatch("Banir/{IdUtilizador}")]
-        public async Task<ActionResult> AlterarEstado(int IdUtilizador)
+        public async Task<ActionResult> AlterarEstado(int IdUtilizador, bool estado)
         {
             try
             {
-                await _utilizadorManager.Banir(IdUtilizador);
+                await _utilizadorManager.Banir(IdUtilizador, estado);
                 return Ok();
             }
             catch
