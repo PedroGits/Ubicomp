@@ -130,8 +130,16 @@ namespace ProjetoUbiqua.EntitiesManagers
 
             var estadoLuzes = clicked ? _algoritmo.BotaoClicado(sala) : _algoritmo.CalcularEstadoDasLuzesSesnoresMovimento(sala);
 
+           
+
             if (estadoLuzes != sala.EstadoLuzes)
+            {
+                sala.EstadoLuzes = estadoLuzes;
+                _dataContext.Sala.Update(sala);
+                await _dataContext.SaveChangesAsync();
                 _clienteMqtt.MandarMensagemAsync(estadoLuzes.ToString(), sala.ID_Sala.ToString());
+            }
+                
         }
     }
 }
