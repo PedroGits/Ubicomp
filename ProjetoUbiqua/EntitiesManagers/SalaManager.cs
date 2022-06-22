@@ -14,6 +14,8 @@ namespace ProjetoUbiqua.EntitiesManagers
             _dataContext = dataContext;
         }
 
+       
+
         public async Task<Sala> AdicionarSala(Sala sala)
         {
             sala.ID_Sala = 0;
@@ -23,7 +25,12 @@ namespace ProjetoUbiqua.EntitiesManagers
             return sala;
         }
 
-        public async Task EditarSala(Sala sala)
+        public async Task<IEnumerable<Sala>> GetAll()
+        {
+           return await _dataContext.Sala.ToListAsync();
+        }
+
+    public async Task EditarSala(Sala sala)
         {
             if (sala == default)
                 throw new NullReferenceException();
@@ -103,7 +110,7 @@ namespace ProjetoUbiqua.EntitiesManagers
             if (sala == default)
                 throw new NullReferenceException();
 
-            List<Sensor> sensores = sala.Sensores;
+            var sensores = sala.Sensores;
 
             return sensores;
         }

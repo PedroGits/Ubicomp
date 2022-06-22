@@ -18,12 +18,7 @@ namespace ProjetoUbiqua.Controllers
             _salaManager = salaManager;
         }
 
-        [HttpGet("SensoresSala"), Authorize(Roles = Roles.Administrador)]
-        public async Task<ActionResult<IEnumerable<Sensor>>> GetListSensores(int IdSala)
-        {
-            return Ok(await _salaManager.GetListSensores(IdSala));
-        }
-
+       
         [HttpPost("AdicionarSala"), Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult<Sala>> AdicionarSala(Sala sala)
         {
@@ -39,7 +34,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPost("EditarSala"), Authorize(Roles = Roles.Administrador)]
+        [HttpPut("EditarSala"), Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> EditarSala(Sala sala)
         {
             try
@@ -54,7 +49,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPost("VisualizarSala")]
+        [HttpGet("VisualizarSala"), ]
         public async Task<ActionResult<Sala>> VisualizarSala(int IdSala)
         {
             try
@@ -69,7 +64,22 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPost("ApagarSala"), Authorize(Roles = Roles.Administrador)]
+        [HttpGet, Authorize(Roles = Roles.Administrador)]
+        public async Task<ActionResult<Sala>> VisualizarSalas(int IdSala)
+        {
+            try
+            {
+                Sala sala = await _salaManager.VisualizarSala(IdSala);
+                return Ok(sala);
+            }
+            catch
+            {
+                return Problem();
+            }
+
+        }
+
+        [HttpDelete, Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> ApagarSala(int IdSala)
         {
             try
@@ -114,8 +124,8 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPatch("LigarDesligarLuzesSala/{IdSala}")]
-        public async Task<ActionResult> LigarDesligarLuzesSala(int IdSala, [FromBody] bool Estado)
+        [HttpPatch("ControlarLuzes/{IdSala}")]
+        public async Task<ActionResult> LigarDesligarLuzes(int IdSala, [FromBody] bool Estado)
         {
             try
             {

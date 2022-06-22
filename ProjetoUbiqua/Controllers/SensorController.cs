@@ -33,7 +33,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPost("EditarSensor"), Authorize(Roles = Roles.Administrador)]
+        [HttpPut("EditarSensor"), Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> EditarSensor(Sensor sensor)
         {
             try
@@ -48,7 +48,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPost("VisualizarSensor")]
+        [HttpGet("VisualizarSensor")]
         public async Task<ActionResult<Sensor>> VisualizarSensor(int IdSensor)
         {
             try
@@ -63,7 +63,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPost("ApagarSala"), Authorize(Roles = Roles.Administrador)]
+        [HttpDelete, Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult> ApagarSensor(int IdSensor)
         {
             try

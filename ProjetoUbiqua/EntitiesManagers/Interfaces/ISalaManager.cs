@@ -11,6 +11,6 @@ namespace ProjetoUbiqua.EntitiesManagers.Interfaces
         Task AssociarSensorSala(int IdSensor, int IdSala);
         Task DesassociarSensorSala(int IdSensor, int IdSala);
         Task LigarDesligarLuzes(int IdSala, bool Estado);
-        Task<List<Sensor>> GetListSensores(int IdSala);
+        Task<IEnumerable<Sala>> GetAll();
     }
 }
