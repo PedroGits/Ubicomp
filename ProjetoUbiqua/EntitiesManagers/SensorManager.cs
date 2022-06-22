@@ -9,9 +9,10 @@ namespace ProjetoUbiqua.EntitiesManagers
         private readonly DataContext _dataContext;
         private readonly ISalaManager _salaManager;
 
-        public SensorManager(DataContext dataContext)
+        public SensorManager(DataContext dataContext, ISalaManager salaManager)
         {
             _dataContext = dataContext;
+            _salaManager = salaManager;
         }
 
         public async Task<Sensor> AdicionarSensor(Sensor sensor)
