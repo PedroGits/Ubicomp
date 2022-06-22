@@ -13,10 +13,11 @@ namespace ProjetoUbiqua.EntitiesManagers
         private readonly IClienteMqtt _clienteMqtt;
 
         public SalaManager(DataContext dataContext,
-            IAlgoritmo algoritmo)
+            IAlgoritmo algoritmo, IClienteMqtt clienteMqtt)
         {
             _dataContext = dataContext;
             _algoritmo = algoritmo;
+            _clienteMqtt = clienteMqtt;
         }
 
 
@@ -122,7 +123,7 @@ namespace ProjetoUbiqua.EntitiesManagers
 
         public async Task DefinirEstadoDasLuzes(int salaId, bool clicked=false)
         {
-            var sala = await _dataContext.Sala.FindAsync(salaId);
+            var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == salaId).Include(x => x.Sensores).FirstAsync();
 
             if (sala == default)
                 return;
