@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjetoUbiqua.Algoritmo.Interfaces;
 using ProjetoUbiqua.Context;
 using ProjetoUbiqua.Entities;
 using ProjetoUbiqua.EntitiesManagers.Interfaces;
@@ -8,13 +9,17 @@ namespace ProjetoUbiqua.EntitiesManagers
     public class SalaManager:ISalaManager
     {
         private readonly DataContext _dataContext;
+        private readonly IAlgoritmo _algoritmo;
+        private readonly IClienteMqtt _clienteMqtt;
 
-        public SalaManager(DataContext dataContext)
+        public SalaManager(DataContext dataContext,
+            IAlgoritmo algoritmo)
         {
             _dataContext = dataContext;
+            _algoritmo = algoritmo;
         }
 
-       
+
 
         public async Task<Sala> AdicionarSala(Sala sala)
         {
@@ -113,6 +118,19 @@ namespace ProjetoUbiqua.EntitiesManagers
             var sensores = sala.Sensores;
 
             return sensores;
+        }
+
+        public async Task DefinirEstadoDasLuzes(int salaId, bool clicked=false)
+        {
+            var sala = await _dataContext.Sala.FindAsync(salaId);
+
+            if (sala == default)
+                return;
+
+            var estadoLuzes = clicked ? _algoritmo.BotaoClicado(sala) : _algoritmo.CalcularEstadoDasLuzesSesnoresMovimento(sala);
+
+            if (estadoLuzes != sala.EstadoLuzes)
+                _clienteMqtt.MandarMensagemAsync(estadoLuzes.ToString(), sala.ID_Sala.ToString());
         }
     }
 }

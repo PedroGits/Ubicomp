@@ -16,6 +16,6 @@ namespace ProjetoUbiqua.Entities
         public int SalaID_Sala { get; set; }
 
         [DefaultValue(false)]
-        public bool? Ligado { get; set; }
+        public bool Ligado { get; set; }
     }
 }

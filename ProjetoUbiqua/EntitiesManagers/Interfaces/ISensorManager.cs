@@ -9,5 +9,6 @@ namespace ProjetoUbiqua.EntitiesManagers.Interfaces
         Task<Sensor> VisualizarSensor(int IdSensor);
         Task ApagarSensor(int IdSensor);
         Task AlterarEstadoSensor(int IdSensor, bool Estado);
+        Task BotaoClicked(int IdSensor);
     }
 }

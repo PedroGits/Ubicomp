@@ -1,6 +1,9 @@
 
 
 
+using ProjetoUbiqua.Algoritmo;
+using ProjetoUbiqua.Algoritmo.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
@@ -22,6 +25,7 @@ builder.Services.AddScoped<ISensorManager, SensorManager>();
 builder.Services.AddScoped<IUtilizadorManager, UtilizadorManager>();
 builder.Services.AddScoped<IJWTService, JWTService>();
 builder.Services.AddScoped<IClienteMqtt, ClienteMqtt>();
+builder.Services.AddScoped<IAlgoritmo, Algoritmo>();
 
 
 

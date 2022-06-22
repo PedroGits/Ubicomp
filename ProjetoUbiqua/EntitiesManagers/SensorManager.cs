@@ -1,4 +1,5 @@
-﻿using ProjetoUbiqua.Entities;
+﻿using ProjetoUbiqua.Constantes;
+using ProjetoUbiqua.Entities;
 using ProjetoUbiqua.EntitiesManagers.Interfaces;
 
 namespace ProjetoUbiqua.EntitiesManagers
@@ -6,6 +7,7 @@ namespace ProjetoUbiqua.EntitiesManagers
     public class SensorManager:ISensorManager
     {
         private readonly DataContext _dataContext;
+        private readonly ISalaManager _salaManager;
 
         public SensorManager(DataContext dataContext)
         {
@@ -56,10 +58,29 @@ namespace ProjetoUbiqua.EntitiesManagers
             if (sensor == default)
                 throw new NullReferenceException();
 
+            if (sensor.Ligado == Estado || sensor.Tipo != TipoSensor.MOVIMENTO)
+                return;
+
             sensor.Ligado = Estado;
 
             _dataContext.Update(sensor);
             await _dataContext.SaveChangesAsync();
+
+            await _salaManager.DefinirEstadoDasLuzes(sensor.SalaID_Sala);
         }
+
+        public async Task BotaoClicked(int IdSensor)
+        {
+            var sensor = await _dataContext.Sensor.Where(sensor => sensor.ID_Sensor == IdSensor).FirstOrDefaultAsync();
+
+            if (sensor == default)
+                throw new NullReferenceException();
+
+            if (sensor.Tipo != TipoSensor.BOTAO)
+                return;
+
+            await _salaManager.DefinirEstadoDasLuzes(sensor.SalaID_Sala, true);
+        }
+
     }
 }

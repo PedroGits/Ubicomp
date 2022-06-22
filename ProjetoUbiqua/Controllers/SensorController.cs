@@ -78,12 +78,27 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpPatch("AlterarEstadoSensor/{IdSensor}")]
+        [HttpPatch("AlterarEstadoSensorMovimento/{IdSensor}")]
         public async Task<ActionResult> AlterarEstadoSensor(int IdSensor, [FromBody] bool Estado)
         {
             try
             {
                 await _sensorManager.AlterarEstadoSensor(IdSensor, Estado);
+                return Ok();
+            }
+            catch
+            {
+                return Problem();
+            }
+
+        }
+
+        [HttpGet("Cliked/{IdSensor}")]
+        public async Task<ActionResult> Clicked (int IdSensor)
+        {
+            try
+            {
+                await _sensorManager.BotaoClicked(IdSensor);
                 return Ok();
             }
             catch
