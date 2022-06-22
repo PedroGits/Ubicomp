@@ -163,7 +163,7 @@ namespace ProjectoUbiquaNUnitTest
 
             UtilizadorManager utilizadorManagerTest = new UtilizadorManager(_dataContext, jwtServiceMock, clienteMqtt);
 
-            Assert.DoesNotThrowAsync(() => utilizadorManagerTest.Banir(idUtilizador));
+            Assert.DoesNotThrowAsync(() => utilizadorManagerTest.Banir(idUtilizador, true));
 
         }
 
@@ -175,7 +175,7 @@ namespace ProjectoUbiquaNUnitTest
 
             UtilizadorManager utilizadorManagerTest = new UtilizadorManager(_dataContext, jwtServiceMock, clienteMqtt);
 
-            Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Banir(idUtilizador));
+            Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Banir(idUtilizador, true));
 
         }
 
