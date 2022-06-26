@@ -23,8 +23,8 @@ namespace ProjetoUbiqua.Controllers
         {
             try
             {
-                var novaSala = await _sensorManager.AdicionarSensor(sensor);
-                return Ok(novaSala);
+                var novoSensor = await _sensorManager.AdicionarSensor(sensor);
+                return Ok(novoSensor);
             }
             catch
             {
@@ -48,7 +48,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpGet("VisualizarSensor")]
+        [HttpGet("VisualizarSensor/{IdSensor}")]
         public async Task<ActionResult<Sensor>> VisualizarSensor(int IdSensor)
         {
             try

@@ -52,7 +52,7 @@ namespace ProjetoUbiqua.Controllers
 
         }
 
-        [HttpGet("VisualizarSala"), ]
+        [HttpGet, Authorize(Roles = Roles.Administrador)]
         public async Task<ActionResult<Sala>> VisualizarSala(int IdSala)
         {
             try
@@ -62,21 +62,6 @@ namespace ProjetoUbiqua.Controllers
                 if (sala == default)
                     return NotFound();
 
-                return Ok(sala);
-            }
-            catch
-            {
-                return Problem();
-            }
-
-        }
-
-        [HttpGet, Authorize(Roles = Roles.Administrador)]
-        public async Task<ActionResult<Sala>> VisualizarSalas(int IdSala)
-        {
-            try
-            {
-                Sala sala = await _salaManager.VisualizarSala(IdSala);
                 return Ok(sala);
             }
             catch
