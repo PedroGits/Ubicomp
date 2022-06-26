@@ -53,7 +53,7 @@ namespace ProjetoUbiqua.EntitiesManagers
             var utilizador = await _dataContext.Utilizador.Where(user => user.ID_Utilizador == IdUtilizador).FirstOrDefaultAsync();
 
             if (utilizador == default)
-                throw new NullReferenceException();
+                throw new KeyNotFoundException();
 
             if (utilizador.Banido == estado)
                 return;
@@ -69,7 +69,7 @@ namespace ProjetoUbiqua.EntitiesManagers
             var utilizador = await _dataContext.Utilizador.Where(user => user.ID_Utilizador == IdUtilizador).FirstOrDefaultAsync();
 
             if (utilizador == default)
-                throw new NullReferenceException();
+                throw new KeyNotFoundException();
 
             _dataContext.Utilizador.Remove(utilizador);
             await _dataContext.SaveChangesAsync();
@@ -78,7 +78,7 @@ namespace ProjetoUbiqua.EntitiesManagers
         public async Task Editar(Utilizador utilizador)
         {
             if (utilizador == default)
-                throw new NullReferenceException();
+                throw new KeyNotFoundException();
 
             _dataContext.Update(utilizador);
             await _dataContext.SaveChangesAsync();
@@ -93,6 +93,8 @@ namespace ProjetoUbiqua.EntitiesManagers
 
         public async Task<RespostaTokenDTO?> Login(LoginDTO login)
         {
+            //falta hash
+
             var utilizador = await _dataContext.Utilizador.Where(user => user.Email == login.Email && user.Password == login.Password && !user.Banido).FirstOrDefaultAsync();
             
             if(utilizador == default)
@@ -108,6 +110,8 @@ namespace ProjetoUbiqua.EntitiesManagers
 
         public async Task<Utilizador> Adicionar(RegistoDTO utilizador)
         {
+            //Falta hash da password
+
             var utilizadorAlreadyExists = _dataContext.Utilizador
                 .Where(uti => uti.Email == utilizador.Email || uti.NomeUtilizador == utilizador.NomeUtilizador)
                 .Any();

@@ -42,8 +42,11 @@ namespace ProjetoUbiqua.Controllers
                 await _salaManager.EditarSala(sala);
                 return Ok();
             }
-            catch
+            catch(Exception ex)
             {
+                if (ex.GetType() == typeof(KeyNotFoundException))
+                    return NotFound();
+
                 return Problem();
             }
 
@@ -54,7 +57,11 @@ namespace ProjetoUbiqua.Controllers
         {
             try
             {
-                Sala sala = await _salaManager.VisualizarSala(IdSala);
+                var sala = await _salaManager.VisualizarSala(IdSala);
+
+                if (sala == default)
+                    return NotFound();
+
                 return Ok(sala);
             }
             catch

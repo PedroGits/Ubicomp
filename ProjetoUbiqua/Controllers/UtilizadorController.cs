@@ -61,8 +61,11 @@ namespace ProjetoUbiqua.Controllers
                 await _utilizadorManager.Editar(utilizador);
                 return Ok();
             }
-            catch
+            catch(Exception ex)
             {
+                if (ex.GetType() == typeof(KeyNotFoundException))
+                    return NotFound();
+
                 return Problem();
             }
             
@@ -76,8 +79,11 @@ namespace ProjetoUbiqua.Controllers
                 await _utilizadorManager.Banir(IdUtilizador, estado);
                 return Ok();
             }
-            catch
+            catch(Exception ex)
             {
+                if (ex.GetType() == typeof(KeyNotFoundException))
+                    return NotFound();
+
                 return Problem();
             }
 
@@ -121,8 +127,11 @@ namespace ProjetoUbiqua.Controllers
                 await _utilizadorManager.Apagar(IdUtilizador);
                 return Ok();
             }
-            catch
+            catch(Exception ex)
             {
+                if (ex.GetType() == typeof(KeyNotFoundException))
+                    return NotFound();
+
                 return Problem();
             }
 

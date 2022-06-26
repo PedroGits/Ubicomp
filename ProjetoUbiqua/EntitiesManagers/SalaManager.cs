@@ -49,9 +49,6 @@ namespace ProjetoUbiqua.EntitiesManagers
         {
             var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == IdSala).Include(x => x.Sensores).FirstOrDefaultAsync();
 
-            if (sala == default)
-                throw new NullReferenceException();
-
             return sala;
         }
 
@@ -60,7 +57,7 @@ namespace ProjetoUbiqua.EntitiesManagers
             var sala = await _dataContext.Sala.Where(sala => sala.ID_Sala == IdSala).FirstOrDefaultAsync();
 
             if (sala == default)
-                throw new NullReferenceException();
+                throw new KeyNotFoundException();
 
             _dataContext.Sala.Remove(sala);
             await _dataContext.SaveChangesAsync();

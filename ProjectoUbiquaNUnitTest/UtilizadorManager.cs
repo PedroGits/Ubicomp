@@ -175,7 +175,7 @@ namespace ProjectoUbiquaNUnitTest
 
             UtilizadorManager utilizadorManagerTest = new UtilizadorManager(_dataContext, jwtServiceMock, clienteMqtt);
 
-            Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Banir(idUtilizador, true));
+            Assert.ThrowsAsync<KeyNotFoundException>(() => utilizadorManagerTest.Banir(idUtilizador, true));
 
         }
 
@@ -215,7 +215,7 @@ namespace ProjectoUbiquaNUnitTest
 
             UtilizadorManager utilizadorManagerTest = new UtilizadorManager(_dataContext, jwtServiceMock, clienteMqtt);
 
-            Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Editar(default));
+            Assert.ThrowsAsync<KeyNotFoundException>(() => utilizadorManagerTest.Editar(default));
         }
 
         [Test]
@@ -255,7 +255,7 @@ namespace ProjectoUbiquaNUnitTest
 
             var idUtilizador = await _dataContext.Utilizador.MaxAsync(x => x.ID_Utilizador);
 
-            Assert.ThrowsAsync<NullReferenceException>(() => utilizadorManagerTest.Apagar(idUtilizador + 1));
+            Assert.ThrowsAsync<KeyNotFoundException>(() => utilizadorManagerTest.Apagar(idUtilizador + 1));
         }
     }
 }
